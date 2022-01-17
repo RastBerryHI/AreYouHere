@@ -15,6 +15,7 @@ public class FieldOfView : MonoBehaviour
 
     [SerializeField] private float _findTargetsDelay;
     public List<Transform> visibleTargets;
+    public Vector3 lastSeenPosition;
 
     public float ViewRadius
     {
@@ -67,6 +68,7 @@ public class FieldOfView : MonoBehaviour
                 if(!Physics.Raycast(transform.position, dirToTarget, distToTarget, _obstacleMask))
                 {
                     visibleTargets.Add(target);
+                    if(EnemyBenavior.s_instance.onBehaviorStateChange != null) EnemyBenavior.s_instance.onBehaviorStateChange(BehaviorStates.Chase);
                 }
             }
         }
