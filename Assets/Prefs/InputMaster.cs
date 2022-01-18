@@ -65,6 +65,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TakeWalkie"",
+                    ""type"": ""Button"",
+                    ""id"": ""2a3bc0ea-4273-426b-87d1-a539e280724c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb926eac-276f-4f01-839d-81acc0067cab"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""TakeWalkie"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -224,6 +243,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_TakeFlashlight = m_Player.FindAction("TakeFlashlight", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_TakeWalkie = m_Player.FindAction("TakeWalkie", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +299,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_TakeFlashlight;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_TakeWalkie;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -289,6 +310,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @TakeFlashlight => m_Wrapper.m_Player_TakeFlashlight;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @TakeWalkie => m_Wrapper.m_Player_TakeWalkie;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -316,6 +338,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @TakeWalkie.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
+                @TakeWalkie.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
+                @TakeWalkie.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -338,6 +363,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @TakeWalkie.started += instance.OnTakeWalkie;
+                @TakeWalkie.performed += instance.OnTakeWalkie;
+                @TakeWalkie.canceled += instance.OnTakeWalkie;
             }
         }
     }
@@ -368,5 +396,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnTakeFlashlight(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnTakeWalkie(InputAction.CallbackContext context);
     }
 }

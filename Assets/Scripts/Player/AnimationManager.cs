@@ -14,6 +14,7 @@ public class AnimationManager : MonoBehaviour
         _anim = GetComponent<Animator>();
         _controls = new InputMaster();
         _controls.Player.TakeFlashlight.performed += context => TakeFlashlight();
+        _controls.Player.TakeWalkie.performed += context => TakeWalkie();
     }
 
     private void OnEnable()
@@ -30,5 +31,19 @@ public class AnimationManager : MonoBehaviour
     {
         b_isEquiped = !b_isEquiped;
         _anim.SetBool("isFlashlight", b_isEquiped);
+    }
+
+    private void TakeWalkie()
+    {
+        b_isEquiped = !b_isEquiped;
+        _anim.SetBool("isWalkie", b_isEquiped);
+        StartCoroutine(DelayRemoveWalkie());
+    }
+
+    private IEnumerator DelayRemoveWalkie()
+    {
+        yield return new WaitForSeconds(0.05f);
+        b_isEquiped = !b_isEquiped;
+        _anim.SetBool("isWalkie", false);
     }
 }

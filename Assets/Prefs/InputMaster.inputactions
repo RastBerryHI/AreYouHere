@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TakeWalkie",
+                    "type": "Button",
+                    "id": "2a3bc0ea-4273-426b-87d1-a539e280724c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -162,6 +170,17 @@
                     "processors": "",
                     "groups": "Devices",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb926eac-276f-4f01-839d-81acc0067cab",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Devices",
+                    "action": "TakeWalkie",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

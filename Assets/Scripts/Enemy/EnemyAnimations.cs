@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAnimations : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyMesh;
+
     private Animator _anim;
     private Controller _controller;
     private bool b_isBlinked = true;
