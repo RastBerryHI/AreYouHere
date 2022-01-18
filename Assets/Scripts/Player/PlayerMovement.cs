@@ -6,21 +6,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundDistance = 0.4f;
+    [SerializeField] private float _sprintingMultiplier;
     [SerializeField] private LayerMask _groundMask;
 
     private bool b_isGrounded;
+
     private CharacterController _controller;
     private InputMaster _controls;
 
     private Vector3 _direction;
     private Vector3 _currentDirection;
     private Vector3 velocity;
+
+    private float _sprintSpeed;
+    private float _baseSpeed;
     private void Awake()
     {
         _controls = new InputMaster();
         _controller = GetComponent<CharacterController>();
+
         _controls.Player.Movement.performed += context =>  Move(context.ReadValue<Vector2>());
         _controls.Player.Movement.canceled += context => StopMove();
+
+        _controls.Player.Sprint.performed += context => Sprint();
+        _controls.Player.Sprint.canceled += context => StopSprint();
+
+        _controls.Player.Crouch.performed += context => Crouch();
+        _controls.Player.Crouch.canceled += context => StopCrouch();
+    }
+
+    private void Start()
+    {
+        _baseSpeed = _moveSpeed;
+        _sprintSpeed = _moveSpeed * _sprintingMultiplier;
     }
 
     private void Update()
@@ -47,6 +65,26 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         _controls.Disable();
+    }
+
+    private void Sprint()
+    {
+        _moveSpeed = _sprintSpeed;
+    }
+
+    private void StopSprint()
+    {
+        _moveSpeed = _baseSpeed;
+    }
+
+    private void Crouch()
+    {
+        _controller.height /= 2;
+    }
+
+    private void StopCrouch()
+    {
+        _controller.height *= 2;
     }
 
     private void Move(Vector2 direction)

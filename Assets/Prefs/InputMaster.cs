@@ -49,6 +49,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""38a991e4-ce4f-4868-8f71-e1e2eb83759d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""70db69a9-24a0-4461-86af-4acd3e233eba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +155,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""TakeFlashlight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cd9df66-8d47-44d6-af2b-6170167cefcd"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99505bd1-9a63-446d-a7cc-60118beece9a"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -184,6 +222,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_MouseX = m_Player.FindAction("MouseX", throwIfNotFound: true);
         m_Player_MouseY = m_Player.FindAction("MouseY", throwIfNotFound: true);
         m_Player_TakeFlashlight = m_Player.FindAction("TakeFlashlight", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -237,6 +277,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_MouseX;
     private readonly InputAction m_Player_MouseY;
     private readonly InputAction m_Player_TakeFlashlight;
+    private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -245,6 +287,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @MouseX => m_Wrapper.m_Player_MouseX;
         public InputAction @MouseY => m_Wrapper.m_Player_MouseY;
         public InputAction @TakeFlashlight => m_Wrapper.m_Player_TakeFlashlight;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -266,6 +310,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @TakeFlashlight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
                 @TakeFlashlight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
                 @TakeFlashlight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -282,6 +332,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @TakeFlashlight.started += instance.OnTakeFlashlight;
                 @TakeFlashlight.performed += instance.OnTakeFlashlight;
                 @TakeFlashlight.canceled += instance.OnTakeFlashlight;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -310,5 +366,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
         void OnTakeFlashlight(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

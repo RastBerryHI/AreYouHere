@@ -952,6 +952,7 @@ GameObject:
   - component: {fileID: 455052401}
   - component: {fileID: 455052402}
   - component: {fileID: 455052403}
+  - component: {fileID: 455052404}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -967,7 +968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455052399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.302, y: 1.9, z: -2.17}
+  m_LocalPosition: {x: -0.302, y: 0.014, z: -2.938}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 467654719}
@@ -1005,9 +1006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2408c44fe0a2b746ad435403fe43ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 2
   _groundCheck: {fileID: 257276842}
   _groundDistance: 0.4
+  _sprintingMultiplier: 2
   _groundMask:
     serializedVersion: 2
     m_Bits: 831
@@ -1030,6 +1032,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &455052404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455052399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393585e2ca0c7ab45b15ec3cde7a4ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashLight: {fileID: 1275266463194571}
 --- !u!1 &461263457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2196,11 @@ Transform:
   m_Father: {fileID: 358598778}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1092584223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5820070893334345585, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
+  m_PrefabInstance: {fileID: 1521671307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1192817383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2786,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.022293475
       objectReference: {fileID: 0}
+    - target: {fileID: -5820070893334345585, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5546308942785753259, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.066436894
@@ -3069,6 +3093,10 @@ PrefabInstance:
     - target: {fileID: -1070232985009656329, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.23500991
+      objectReference: {fileID: 0}
+    - target: {fileID: -417878991522404143, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -415919170949790895, guid: c025ea9f2be098a4b8aafc16dd605413, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3964,6 +3992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c36d596bcd9dc146afde03275eba4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyMesh: {fileID: 1092584223}
 --- !u!1 &1863556458
 GameObject:
   m_ObjectHideFlags: 0
@@ -4393,7 +4422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4153172338593561
 Transform:
   m_ObjectHideFlags: 0
@@ -4741,6 +4770,7 @@ GameObject:
   - component: {fileID: 543450652221644922}
   - component: {fileID: 1478313877}
   - component: {fileID: 1478313876}
+  - component: {fileID: 919132148484569793}
   m_Layer: 6
   m_Name: arms1
   m_TagString: Untagged
@@ -4748,6 +4778,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148484569793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148484569792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393585e2ca0c7ab45b15ec3cde7a4ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashLight: {fileID: 1275266463194571}
 --- !u!4 &1155119661965949028
 Transform:
   m_ObjectHideFlags: 0

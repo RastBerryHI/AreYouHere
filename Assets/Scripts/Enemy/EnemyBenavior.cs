@@ -24,6 +24,11 @@ public class EnemyBenavior : MonoBehaviour
 
     public UnityAction<BehaviorStates> onBehaviorStateChange;
 
+    public BehaviorStates State
+    {
+        get => _state;
+    }
+
     private void Awake()
     {
         if (s_instance == null)
