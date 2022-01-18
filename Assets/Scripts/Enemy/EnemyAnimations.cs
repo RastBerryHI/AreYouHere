@@ -24,12 +24,19 @@ public class EnemyAnimations : MonoBehaviour
     private IEnumerator PlayBlink()
     {
         b_isBlinked = false;
-        float delay = Random.Range(0.1f, 1f);
+        float delay = Random.Range(0.5f, 2f);
 
         yield return new WaitForSeconds(delay);
         b_isBlinked = true;
         b_isEnabled = !b_isEnabled;
         _enemyMesh.gameObject.SetActive(b_isEnabled);
+    }
+
+    private IEnumerator EnableMesh()
+    {
+        b_isBlinked = true;
+        yield return new WaitForSeconds(5f);
+        _enemyMesh.gameObject.SetActive(true);
     }
 
     private IEnumerator<WaitForSeconds> VisuilizeEnemy()
@@ -39,9 +46,13 @@ public class EnemyAnimations : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             _anim.SetFloat("Blend", _controller.Velocity);
 
-            if ((EnemyBenavior.s_instance.State == BehaviorStates.Chase || EnemyBenavior.s_instance.State == BehaviorStates.Search) && b_isBlinked == true)
+            if ((EnemyBenavior.s_instance.State == BehaviorStates.Chase && b_isBlinked == true))
             {
                 StartCoroutine(PlayBlink());
+            }
+            if(EnemyBenavior.s_instance.State != BehaviorStates.Chase)
+            {
+                StartCoroutine(EnableMesh());
             }
         }
     }

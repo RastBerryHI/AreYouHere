@@ -5,14 +5,6 @@ public class Equipment : MonoBehaviour
 {
     [SerializeField] private GameObject _flashLight;
     [SerializeField] private GameObject _walkie;
-    public static Equipment s_instance;
-    private void Awake()
-    {
-        if(s_instance == null)
-        {
-            s_instance = this;
-        }
-    }
 
     public void EnableFlashlight()
     {
