@@ -8,6 +8,11 @@ ModelImporter:
     second: Idle
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GirlScoutZombie_Material
+    second: {fileID: 2100000, guid: 2f07a444ea79c8e4896d64273459d4a9, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: GirlScout_diffuse
