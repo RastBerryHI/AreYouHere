@@ -41,6 +41,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TakeFlashlight"",
+                    ""type"": ""Button"",
+                    ""id"": ""38c3d2fd-1dd1-4212-8d6a-1d5372077a87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee685924-a923-4517-889b-bfeefaedde16"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""TakeFlashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +183,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_MouseX = m_Player.FindAction("MouseX", throwIfNotFound: true);
         m_Player_MouseY = m_Player.FindAction("MouseY", throwIfNotFound: true);
+        m_Player_TakeFlashlight = m_Player.FindAction("TakeFlashlight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +236,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_MouseX;
     private readonly InputAction m_Player_MouseY;
+    private readonly InputAction m_Player_TakeFlashlight;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -223,6 +244,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @MouseX => m_Wrapper.m_Player_MouseX;
         public InputAction @MouseY => m_Wrapper.m_Player_MouseY;
+        public InputAction @TakeFlashlight => m_Wrapper.m_Player_TakeFlashlight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +263,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @MouseY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseY;
                 @MouseY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseY;
                 @MouseY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseY;
+                @TakeFlashlight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
+                @TakeFlashlight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
+                @TakeFlashlight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeFlashlight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -254,6 +279,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @MouseY.started += instance.OnMouseY;
                 @MouseY.performed += instance.OnMouseY;
                 @MouseY.canceled += instance.OnMouseY;
+                @TakeFlashlight.started += instance.OnTakeFlashlight;
+                @TakeFlashlight.performed += instance.OnTakeFlashlight;
+                @TakeFlashlight.canceled += instance.OnTakeFlashlight;
             }
         }
     }
@@ -281,5 +309,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+        void OnTakeFlashlight(InputAction.CallbackContext context);
     }
 }
