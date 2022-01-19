@@ -73,6 +73,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interract"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d920f6f-03c4-4d8a-80c3-bd4bc07092dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -196,6 +204,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""TakeWalkie"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6e83edf-45bb-40c0-ae86-21cc253a5716"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""Interract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -244,6 +263,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_TakeWalkie = m_Player.FindAction("TakeWalkie", throwIfNotFound: true);
+        m_Player_Interract = m_Player.FindAction("Interract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -300,6 +320,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_TakeWalkie;
+    private readonly InputAction m_Player_Interract;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -311,6 +332,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @TakeWalkie => m_Wrapper.m_Player_TakeWalkie;
+        public InputAction @Interract => m_Wrapper.m_Player_Interract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -341,6 +363,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @TakeWalkie.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
                 @TakeWalkie.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
                 @TakeWalkie.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeWalkie;
+                @Interract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
+                @Interract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
+                @Interract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -366,6 +391,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @TakeWalkie.started += instance.OnTakeWalkie;
                 @TakeWalkie.performed += instance.OnTakeWalkie;
                 @TakeWalkie.canceled += instance.OnTakeWalkie;
+                @Interract.started += instance.OnInterract;
+                @Interract.performed += instance.OnInterract;
+                @Interract.canceled += instance.OnInterract;
             }
         }
     }
@@ -397,5 +425,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnTakeWalkie(InputAction.CallbackContext context);
+        void OnInterract(InputAction.CallbackContext context);
     }
 }

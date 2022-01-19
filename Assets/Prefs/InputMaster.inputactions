@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Interract",
+                    "type": "Button",
+                    "id": "0d920f6f-03c4-4d8a-80c3-bd4bc07092dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -181,6 +189,17 @@
                     "processors": "",
                     "groups": "Devices",
                     "action": "TakeWalkie",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6e83edf-45bb-40c0-ae86-21cc253a5716",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Devices",
+                    "action": "Interract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

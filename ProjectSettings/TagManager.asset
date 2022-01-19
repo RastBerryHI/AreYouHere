@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SeekPoint
+  - Lock
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Target
-  - 
+  - Interractable
   - PostProcessing
   - Not in Reflection
   - 

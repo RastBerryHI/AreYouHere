@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
 
     private bool b_isGrounded;
+    private bool b_isMovementAllowed;
 
     private CharacterController _controller;
     private InputMaster _controls;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float _baseSpeed;
     private void Awake()
     {
+        b_isMovementAllowed = true;
         _controls = new InputMaster();
         _controller = GetComponent<CharacterController>();
 
@@ -33,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
         _controls.Player.Crouch.performed += context => Crouch();
         _controls.Player.Crouch.canceled += context => StopCrouch();
+
+        GenericEvents.s_instance.onStartPickCode.AddListener(ChangeAllowment);
+        GenericEvents.s_instance.onEndPickCode.AddListener(ChangeAllowment);
     }
 
     private void Start()
@@ -43,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (b_isMovementAllowed == false) return;
+
         b_isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
 
         if (b_isGrounded == true && velocity.y < 0)
@@ -55,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += -9.81f * Time.deltaTime;
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void ChangeAllowment()
+    {
+        b_isMovementAllowed = !b_isMovementAllowed;
     }
 
     private void OnEnable()

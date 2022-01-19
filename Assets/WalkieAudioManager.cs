@@ -27,8 +27,6 @@ public class WalkieAudioManager : MonoBehaviour
             yield return new WaitForSeconds(delay);
             float distance = Vector3.Distance(transform.position, EnemyBenavior.s_instance.transform.position);
 
-            print(_audioVoice.isPlaying);
-
             if (distance >= 20)
             {
                 _audio.volume = 0.1f;
