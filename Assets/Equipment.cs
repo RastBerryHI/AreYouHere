@@ -19,6 +19,7 @@ public class Equipment : MonoBehaviour
 
     public void EnableWalkie()
     {
-        _walkie.SetActive(true) ;
+        print("Enabled");
+        _walkie.SetActive(true);
     }
 }
