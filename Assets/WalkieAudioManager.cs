@@ -35,7 +35,7 @@ public class WalkieAudioManager : MonoBehaviour
             else if(distance < 20 && distance >= 15)
             {
                 _audio.volume = 0.3f;
-                _audioVoice.volume = 0.01f;
+                _audioVoice.volume = 0;
                 if (_audioVoice.isPlaying == false)
                 {
                     _audioVoice.PlayOneShot(_ghostWhimps[Random.Range(0, _ghostWhimps.Length - 1)]);
@@ -44,7 +44,7 @@ public class WalkieAudioManager : MonoBehaviour
             else if(distance < 15 && distance >= 10)
             {
                 _audio.volume = 0.5f;
-                _audioVoice.volume = 0.05f;
+                _audioVoice.volume = 0;
                 if (_audioVoice.isPlaying == false)
                 {
                     _audioVoice.PlayOneShot(_ghostWhimps[Random.Range(0, _ghostWhimps.Length - 1)]);
@@ -53,7 +53,7 @@ public class WalkieAudioManager : MonoBehaviour
             else if(distance < 10 && distance >= 5f)
             {
                 _audio.volume = 0.7f;
-                _audioVoice.volume = 0.1f;
+                _audioVoice.volume = 0;
                 if (_audioVoice.isPlaying == false)
                 {
                     _audioVoice.PlayOneShot(_ghostWhimps[Random.Range(0, _ghostWhimps.Length - 1)]);
@@ -62,7 +62,7 @@ public class WalkieAudioManager : MonoBehaviour
             else if(distance < 5 && distance >= 3)
             {
                 _audio.volume = 0.85f;
-                _audioVoice.volume = 0.3f;
+                _audioVoice.volume = 0.05f;
 
                 if (_audioVoice.isPlaying == false)
                 {
@@ -72,7 +72,7 @@ public class WalkieAudioManager : MonoBehaviour
             else if(distance < 3)
             {
                 _audio.volume = 1f;
-                _audioVoice.volume = 0.5f;
+                _audioVoice.volume = 0.1f;
 
                 if (_audioVoice.isPlaying == false)
                 {

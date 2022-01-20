@@ -36,14 +36,15 @@ public class PlayerMovement : MonoBehaviour
         _controls.Player.Crouch.performed += context => Crouch();
         _controls.Player.Crouch.canceled += context => StopCrouch();
 
-        GenericEvents.s_instance.onStartPickCode.AddListener(ChangeAllowment);
-        GenericEvents.s_instance.onEndPickCode.AddListener(ChangeAllowment);
     }
 
     private void Start()
     {
         _baseSpeed = _moveSpeed;
         _sprintSpeed = _moveSpeed * _sprintingMultiplier;
+
+        GenericEvents.s_instance.onStartPickCode.AddListener(ChangeAllowment);
+        GenericEvents.s_instance.onEndPickCode.AddListener(ChangeAllowment);
     }
 
     private void Update()

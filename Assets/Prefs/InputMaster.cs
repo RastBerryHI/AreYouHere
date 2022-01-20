@@ -81,6 +81,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseL"",
+                    ""type"": ""Button"",
+                    ""id"": ""7187394e-9636-41af-bec5-415dbbb700c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseDrag"",
+                    ""type"": ""Value"",
+                    ""id"": ""68f2130e-9c0b-4433-86be-16f5e4dcf426"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -215,6 +231,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Interract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e42c8eeb-16da-4b33-a060-559a4eb93be5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""MouseL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63b1ca32-f227-4773-a3f6-e571e9346731"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Devices"",
+                    ""action"": ""MouseDrag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -264,6 +302,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_TakeWalkie = m_Player.FindAction("TakeWalkie", throwIfNotFound: true);
         m_Player_Interract = m_Player.FindAction("Interract", throwIfNotFound: true);
+        m_Player_MouseL = m_Player.FindAction("MouseL", throwIfNotFound: true);
+        m_Player_MouseDrag = m_Player.FindAction("MouseDrag", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -321,6 +361,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_TakeWalkie;
     private readonly InputAction m_Player_Interract;
+    private readonly InputAction m_Player_MouseL;
+    private readonly InputAction m_Player_MouseDrag;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -333,6 +375,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @TakeWalkie => m_Wrapper.m_Player_TakeWalkie;
         public InputAction @Interract => m_Wrapper.m_Player_Interract;
+        public InputAction @MouseL => m_Wrapper.m_Player_MouseL;
+        public InputAction @MouseDrag => m_Wrapper.m_Player_MouseDrag;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -366,6 +410,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
                 @Interract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
                 @Interract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
+                @MouseL.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseL;
+                @MouseL.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseL;
+                @MouseL.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseL;
+                @MouseDrag.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDrag;
+                @MouseDrag.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDrag;
+                @MouseDrag.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDrag;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -394,6 +444,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interract.started += instance.OnInterract;
                 @Interract.performed += instance.OnInterract;
                 @Interract.canceled += instance.OnInterract;
+                @MouseL.started += instance.OnMouseL;
+                @MouseL.performed += instance.OnMouseL;
+                @MouseL.canceled += instance.OnMouseL;
+                @MouseDrag.started += instance.OnMouseDrag;
+                @MouseDrag.performed += instance.OnMouseDrag;
+                @MouseDrag.canceled += instance.OnMouseDrag;
             }
         }
     }
@@ -426,5 +482,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnTakeWalkie(InputAction.CallbackContext context);
         void OnInterract(InputAction.CallbackContext context);
+        void OnMouseL(InputAction.CallbackContext context);
+        void OnMouseDrag(InputAction.CallbackContext context);
     }
 }

@@ -68,6 +68,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MouseL",
+                    "type": "Button",
+                    "id": "7187394e-9636-41af-bec5-415dbbb700c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MouseDrag",
+                    "type": "Value",
+                    "id": "68f2130e-9c0b-4433-86be-16f5e4dcf426",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -200,6 +216,28 @@
                     "processors": "",
                     "groups": "Devices",
                     "action": "Interract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e42c8eeb-16da-4b33-a060-559a4eb93be5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Devices",
+                    "action": "MouseL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63b1ca32-f227-4773-a3f6-e571e9346731",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Devices",
+                    "action": "MouseDrag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -7,6 +7,7 @@ public class GenericEvents : MonoBehaviour
 
     public UnityEvent onStartPickCode;
     public UnityEvent onEndPickCode;
+    public UnityEvent onSuccessPickCode;
     public UnityEvent<Transform> onGetCameraPosition;
 
     private void Awake()

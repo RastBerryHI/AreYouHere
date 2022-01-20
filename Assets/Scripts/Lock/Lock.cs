@@ -10,12 +10,16 @@ public enum Disks : sbyte
 public class Lock : MonoBehaviour
 {
     [SerializeField] private Transform[] _disks;
+    [SerializeField] private Transform _handle;
     [SerializeField] private Transform _pickupPosition;
 
+    private Vector3 _handleRot;
     private Vector3 _rotation;
     private Vector3 _code;
 
-    public int cylinderA, cylinderB, cylinderC;
+
+    private int cylinderA, cylinderB, cylinderC;
+    private bool b_iscylinderA, b_iscylinderB, b_iscylinderC;
 
     public Transform PickupPosition
     {
@@ -73,36 +77,66 @@ public class Lock : MonoBehaviour
     private void Awake()
     {
         _rotation = new Vector3(0, 36, 0);
+        _handleRot = new Vector3(50, 0, 0);
         _code = new Vector3(6, 8, 1);
     }
 
+    private void Start()
+    {
+        GenericEvents.s_instance.onSuccessPickCode.AddListener(OpenLock);
+    }
+
+    private void OpenLock()
+    {
+        transform.gameObject.AddComponent<Rigidbody>();
+        _handle.Rotate(_handleRot);
+        Destroy(gameObject, 15f);
+    }
 
     [ContextMenu("Rotate Disk")]
     public void Rotate(Disks disk)
     {
         int diskId = (int)disk;
         _disks[diskId].transform.Rotate(_rotation);
-
+        print("Rotating");
         switch (disk)
         {
             case Disks.First:
                 if (++CylinderA == (int)_code.x)
                 {
-                    print("CYLIDER A IS RIGHT");
+                    b_iscylinderA = true;
+                }
+                else
+                {
+                    b_iscylinderA = false;
                 }
                 break;
             case Disks.Second:
                 if (++CylinderB == (int)_code.y)
                 {
-                    print("CYLIDER B IS RIGHT");
+                    b_iscylinderB = true;
+                }
+                else
+                {
+                    b_iscylinderB = false;
                 }
                 break;
             case Disks.Third:
                 if (++CylinderC == (int)_code.z)
                 {
-                    print("CYLIDER C IS RIGHT");
+                    b_iscylinderC = true;
+                }
+                else
+                {
+                    b_iscylinderC = false;
                 }
                 break;
+        }
+
+        if(b_iscylinderA == true && b_iscylinderB == true && b_iscylinderC == true)
+        {
+            GenericEvents.s_instance.onSuccessPickCode.Invoke();
+            GenericEvents.s_instance.onEndPickCode.Invoke();
         }
     }
 }

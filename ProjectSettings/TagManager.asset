@@ -6,6 +6,9 @@ TagManager:
   tags:
   - SeekPoint
   - Lock
+  - CylinderA
+  - CylinderB
+  - CylinderC
   layers:
   - Default
   - TransparentFX
